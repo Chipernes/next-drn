@@ -1,5 +1,5 @@
 import { CSSProperties } from 'react';
-import { YodaColors, YodaFontSize, YodaJustifyContent, YodaSpacing } from '@/yoda-ui/yodaTheme';
+import { YodaColors, YodaFontSize, YodaJustifyContent, YodaSpacing } from 'yoda-ui/yodaTheme';
 
 export const pageStyle: CSSProperties = {
   fontSize: YodaFontSize.xxxLarge,
@@ -15,7 +15,7 @@ export const wrapperStyle: CSSProperties = {
 
 export const contentStyle: CSSProperties = {
   flex: 1,
-  padding: YodaSpacing.large
+  padding: YodaSpacing.large,
 };
 
 export const headerStyle: CSSProperties = {
@@ -23,7 +23,7 @@ export const headerStyle: CSSProperties = {
   background: YodaColors.gray4,
   display: 'flex',
   alignItems: YodaJustifyContent.center,
-  justifyContent:YodaJustifyContent.center,
+  justifyContent: YodaJustifyContent.center,
   padding: '0 20px',
   color: YodaColors.white,
 };

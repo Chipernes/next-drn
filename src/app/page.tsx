@@ -1,5 +1,5 @@
-import Box from '@/yoda-ui/components/Box';
-import { pageStyle } from '@/app/page.style';
+import { pageStyle } from 'app/page.style';
+import Box from 'yoda-ui/components/Box';
 
 export default function Home() {
   return (
