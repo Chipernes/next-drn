@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, FC } from 'react';
 import { YodaContextValue } from 'yoda-ui/yodaForm/yodaForm.types';
 

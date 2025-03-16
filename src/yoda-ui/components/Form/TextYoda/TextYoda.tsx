@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, useState } from 'react';
 import TextField from 'yoda-ui/components/Form/TextField';
 import { TextYodaInputProps } from 'yoda-ui/components/Form/TextYoda';

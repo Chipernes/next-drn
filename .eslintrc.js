@@ -158,7 +158,6 @@ module.exports = {
       vars: 'all',
       varsIgnorePattern: '^_',
     }],
-    // react specific, BO only
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-key': 'error',
