@@ -44,7 +44,7 @@ jobs:
           node-version: '18.17.1'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --force
 
       # TODO: Add tests checking in future
       #- name: Test
