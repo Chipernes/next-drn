@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "tsc --noEmit && eslint \"*/**/*.{js,ts,tsx}\" --max-warnings=0",
     "ci:lint": "eslint \"*/**/*.{js,ts,tsx}\" --quiet",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -20,8 +23,11 @@
     "@mui/x-data-grid": "^7.27.3",
     "@mui/x-date-pickers": "^7.27.3",
     "@mui/x-date-pickers-pro": "^7.27.3",
+    "@neondatabase/serverless": "^0.10.4",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.40.1",
     "lodash": "^4.17.21",
     "next": "15.1.7",
     "react": "^19.0.0",
@@ -37,6 +43,7 @@
     "@types/react-dom": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
+    "drizzle-kit": "^0.30.5",
     "eslint": "^8.55.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",

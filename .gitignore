@@ -24,6 +24,7 @@
 
 # misc
 .DS_Store
+migrations
 *.pem
 
 # debug
@@ -43,3 +44,5 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+.env*.local
