@@ -1,9 +1,9 @@
 import { config } from 'dotenv';
 import { defineConfig } from 'drizzle-kit';
 
-const currentEnviroment = process.env.NODE_ENV || 'development';
+const currentEnvironment = process.env.VERCEL_TARGET_ENV || 'development';
 
-config({ path: currentEnviroment === 'production' ? '.env.production' : '.env.local' });
+config({ path: currentEnvironment === 'production' ? '.env.production' : '.env.local' });
 
 export default defineConfig({
   schema: './database/schema.ts',
