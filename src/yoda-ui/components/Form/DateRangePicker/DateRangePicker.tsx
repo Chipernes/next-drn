@@ -1,6 +1,7 @@
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import MuiDateRangePicker from '@mui/lab/DateRangePicker';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+/* eslint-disable import/no-cycle */
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 import { FC } from 'react';
 import ClearButton from './ClearButton';
 import useDateRangePicker from './DateRangePicker.hook';
@@ -10,7 +11,7 @@ import Box from 'yoda-ui/components/Box';
 import FormHelperText from 'yoda-ui/components/Form/FormHelperText';
 import TextField from 'yoda-ui/components/Form/TextField';
 
-const DateRangePicker: FC<DateRangePickerProps> = ({
+const CustomDateRangePicker: FC<DateRangePickerProps> = ({
   name,
   validation,
   onChange,
@@ -40,52 +41,54 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
 
   return (
     <LocalizationProvider dateAdapter={ AdapterDateFns }>
-      <MuiDateRangePicker
-        inputFormat="dd.MM.yyyy"
-        mask="__.__.____"
-        onClose={ () => hideCalendar() }
-        onChange={ (range) => handleChange(!disabledStartRange ? range : [fieldValue?.[0], range[1] || fieldValue?.[1]]) }
+      <DateRangePicker
         value={ fieldValue || [null, null] as DateRange }
+        onClose={ hideCalendar }
         open={ calendarOpen }
+        onChange={ (range) => handleChange(!disabledStartRange ? range : [fieldValue?.[0], range[1] || fieldValue?.[1]]) }
         disabled={ disabled }
         shouldDisableDate={ shouldDisableDate }
-        renderInput={
-          (startProps, endProps) => (
-            <>
-              <TextField
-                { ...startProps }
-                sx={ dateRangePickerStyles.textField }
-                helperText={ null }
-                required={ startRequired }
-                error={ fieldShowError }
-                onClick={ !disabledStartRange ? showCalendar : undefined }
-                disabled={ disabled || disabledStartRange }
-                inputProps={
-                  {
-                    ...startProps.inputProps,
-                    readOnly: disabled || disabledStartRange,
+        calendars={ 2 }
+        slots={
+          {
+            textField: (params) => (
+              <>
+                <TextField
+                  { ...params.startProps }
+                  sx={ dateRangePickerStyles.textField }
+                  helperText={ null }
+                  required={ startRequired }
+                  error={ fieldShowError }
+                  onClick={ !disabledStartRange ? showCalendar : undefined }
+                  disabled={ disabled || disabledStartRange }
+                  inputProps={
+                    {
+                      ...params.startProps.inputProps,
+                      readOnly: disabled || disabledStartRange,
+                    }
                   }
-                }
-              />
-              <Box sx={ dateRangePickerStyles.box }>{ separator }</Box>
-              <TextField
-                { ...endProps }
-                sx={ dateRangePickerStyles.textField }
-                helperText={ null }
-                required={ endRequired }
-                error={ fieldShowError }
-                onClick={ showCalendar }
-                disabled={ disabled }
-                InputProps={
-                  {
-                    endAdornment: disabled || disabledStartRange
-                      ? null
-                      : <ClearButton onClick={ handleClearButtonClick } disabled={ clearButtonDisabled } />,
+                />
+                <Box sx={ dateRangePickerStyles.box }>{ separator }</Box>
+                <TextField
+                  { ...params.endProps }
+                  sx={ dateRangePickerStyles.textField }
+                  helperText={ null }
+                  required={ endRequired }
+                  error={ fieldShowError }
+                  onClick={ showCalendar }
+                  disabled={ disabled }
+                  InputProps={
+                    {
+                      endAdornment:
+                    disabled || disabledStartRange ? null : (
+                      <ClearButton onClick={ handleClearButtonClick } disabled={ clearButtonDisabled } />
+                    ),
+                    }
                   }
-                }
-              />
-            </>
-          )
+                />
+              </>
+            ),
+          }
         }
         { ...props }
       />
@@ -95,4 +98,4 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
   );
 };
 
-export default DateRangePicker;
+export default CustomDateRangePicker;

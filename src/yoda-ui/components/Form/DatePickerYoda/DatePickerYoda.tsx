@@ -1,10 +1,7 @@
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import MuiDatePicker from '@mui/lab/DatePicker';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { FC } from 'react';
-import { datePickerStyle } from 'yoda-ui/components/Form/DatePickerYoda/DatePicker.styles';
-import FormHelperText from 'yoda-ui/components/Form/FormHelperText';
-import TextField from 'yoda-ui/components/Form/TextField';
 import { useYodaField } from 'yoda-ui/yodaForm';
 import { YodaFieldValidation } from 'yoda-ui/yodaForm/yodaForm.types';
 
@@ -20,7 +17,8 @@ export type DatePickerYodaInputProps = {
   validation?: YodaFieldValidation;
 };
 
-const DatePickerYoda: FC<DatePickerYodaInputProps> = ({ disabled,
+const DatePickerYoda: FC<DatePickerYodaInputProps> = ({
+  disabled,
   label,
   onChange,
   minDate,
@@ -28,38 +26,36 @@ const DatePickerYoda: FC<DatePickerYodaInputProps> = ({ disabled,
   defaultValue,
   name,
   validation,
-  required }) => {
-  const { onChangeFieldDate,
-    fieldValue,
-    fieldShowError,
-    fieldErrorMessage } = useYodaField({ name, defaultValue, onChange, validation });
+  required,
+}) => {
+  const { onChangeFieldDate, fieldValue, fieldShowError, fieldErrorMessage } = useYodaField({
+    name,
+    defaultValue,
+    onChange,
+    validation,
+  });
 
   return (
-
     <LocalizationProvider dateAdapter={ AdapterDateFns }>
-      <MuiDatePicker<Date>
+      <DatePicker
         disabled={ disabled }
-        mask="__.__.____"
-        inputFormat="dd.MM.yyyy"
+        format="dd.MM.yyyy"
         onChange={ onChangeFieldDate }
         label={ label }
         value={ fieldValue as Date }
         minDate={ minDate }
         maxDate={ maxDate }
         views={ ['year', 'month', 'day'] }
-        renderInput={
-          (params) => (
-            <TextField
-              { ...params }
-              sx={ datePickerStyle.textField }
-              helperText={ null }
-              required={ required }
-              error={ fieldShowError }
-            />
-          )
+        slotProps={
+          {
+            textField: {
+              required,
+              error: fieldShowError,
+              helperText: fieldShowError ? fieldErrorMessage : undefined,
+            },
+          }
         }
       />
-      { fieldShowError && <FormHelperText error>{ fieldErrorMessage }</FormHelperText> }
     </LocalizationProvider>
   );
 };

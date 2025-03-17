@@ -25,7 +25,7 @@ jobs:
           node-version: '18.18.0'
 
       - name: Install dependencies
-        run: npm install --force
+        run: npm install
 
       - name: Build
         run: npm run build
@@ -44,7 +44,7 @@ jobs:
           node-version: '18.17.1'
 
       - name: Install dependencies
-        run: npm install --force
+        run: npm install
 
       # TODO: Add tests checking in future
       #- name: Test
