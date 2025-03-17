@@ -18,8 +18,10 @@ export default function RootLayout({
       <body>
         <Box style={ wrapperStyle }>
           <Box style={ headerStyle }>SOME HEADER WILL BE ADDED</Box>
-          <Box style={ contentStyle }>
-            { children }
+          <Box sx={ contentStyle }>
+            <Box flexDirection="column" marginX="auto" height="100%">
+              { children }
+            </Box>
           </Box>
           <Box style={ footerStyle }>SOME FOOTER WILL BE ADDED</Box>
         </Box>

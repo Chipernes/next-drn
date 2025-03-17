@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef } from 'react';
 
 // This hook was created to keep and return the same value

@@ -1,5 +1,7 @@
+import { Theme } from '@mui/material/styles';
+import { SxProps } from '@mui/system';
 import { CSSProperties } from 'react';
-import { YodaColors, YodaFontSize, YodaJustifyContent, YodaSpacing } from 'yoda-ui/yodaTheme';
+import { fromUnitsToRem, YodaColors, YodaFontSize, YodaJustifyContent, YodaSpacing } from 'yoda-ui/yodaTheme';
 
 export const pageStyle: CSSProperties = {
   fontSize: YodaFontSize.xxxLarge,
@@ -13,9 +15,14 @@ export const wrapperStyle: CSSProperties = {
   background: YodaColors.background,
 };
 
-export const contentStyle: CSSProperties = {
-  flex: 1,
-  padding: YodaSpacing.large,
+export const contentStyle: SxProps<Theme> = {
+  position: 'relative',
+  flex: 3,
+  paddingY: YodaSpacing.medium,
+  paddingX: fromUnitsToRem(60),
+  backgroundColor: YodaColors.blue1,
+  width: '100%',
+  boxSizing: 'border-box',
 };
 
 export const headerStyle: CSSProperties = {

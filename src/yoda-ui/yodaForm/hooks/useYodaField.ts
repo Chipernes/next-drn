@@ -1,3 +1,5 @@
+'use client';
+
 import { AutocompleteChangeReason } from '@mui/material';
 import isEqual from 'lodash/isEqual';
 import { ChangeEvent, SyntheticEvent, useCallback, useEffect } from 'react';

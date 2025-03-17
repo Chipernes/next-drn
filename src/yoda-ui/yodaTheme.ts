@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-duplicate-enum-values */
 import { createTheme, Theme } from '@mui/material/styles';
 import { SxProps as MuiSxProps } from '@mui/system';
 

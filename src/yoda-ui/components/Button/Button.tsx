@@ -1,3 +1,5 @@
+'use client';
+
 import MuiButton from '@mui/material/Button';
 import { Theme } from '@mui/material/styles';
 import { SxProps } from '@mui/system';
@@ -9,7 +11,7 @@ import { YodaBorderRadius } from 'yoda-ui/yodaTheme';
 
 const useButtonStyles = (type: ButtonType, spec: StylesByType, buttonWidth?: number): SxProps<Theme> => ({
   padding: '0.75rem 1.5rem',
-  borderRadius: `${YodaBorderRadius.xxxLarge}`,
+  borderRadius: YodaBorderRadius.xxxLarge,
   boxSizing: 'border-box',
   textTransform: 'none',
   height: '40px',
@@ -36,8 +38,7 @@ const Button: FC<ButtonProps> = (props) => {
   const buttonSpec = startIcon ? IconButtonStyles : ButtonStyles;
   const [buttonWidth, setButtonWidth] = useState(0);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const measuredRef = useCallback((node: any) => {
+  const measuredRef = useCallback((node: HTMLButtonElement | null) => {
     if (node !== null) {
       setButtonWidth(node.getBoundingClientRect().width);
     }
