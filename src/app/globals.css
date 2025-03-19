@@ -22,3 +22,14 @@ a {
   color: #0087CD;
   text-decoration: none;
 }
+
+/* Keep nested CSS selector to get higher priority than default CSS declaration */
+.Toastify .Toastify__toast--success {
+  background: #79b981;
+}
+.Toastify .Toastify__toast--warning {
+  background: #DB9143;
+}
+.Toastify .Toastify__toast--error {
+  background: #E05050;
+}

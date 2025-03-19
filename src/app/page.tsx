@@ -1,19 +1,17 @@
-import { db } from '../../database/drizzle';
-import { users } from '../../database/schema';
+import { redirect } from 'next/navigation';
+import { auth } from '../../auth';
 import { pageStyle } from 'app/page.style';
 import Box from 'yoda-ui/components/Box';
 
 export default async function Home() {
-  const result = await db.select().from(users);
-  const allUsers = JSON.stringify(result, null, 2);
+  const session = await auth();
+  if (!session) {
+    redirect('/verify');
+  }
 
   return (
     <Box style={ pageStyle }>
-      Main page
-      Vercel and CI/CD
-      <Box>
-        { allUsers }
-      </Box>
+      Main page with client menu for future
     </Box>
   );
 }

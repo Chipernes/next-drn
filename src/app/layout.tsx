@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
-import { contentStyle, footerStyle, headerStyle, wrapperStyle } from 'app/page.style';
+import { SessionProvider } from 'next-auth/react';
+import { ReactNode } from 'react';
+import { ToastContainer } from 'react-toastify';
+import { auth } from '../../auth';
+import { contentStyle, footerStyle, wrapperStyle } from 'app/page.style';
 import './globals.css';
+import Header from 'components/header/header';
 import Box from 'yoda-ui/components/Box';
 
 export const metadata: Metadata = {
@@ -8,24 +13,25 @@ export const metadata: Metadata = {
   description: 'Tasty dinner right now!',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const session = await auth();
+
   return (
     <html lang="en">
-      <body>
-        <Box style={ wrapperStyle }>
-          <Box style={ headerStyle }>SOME HEADER WILL BE ADDED</Box>
-          <Box sx={ contentStyle }>
-            <Box flexDirection="column" marginX="auto" height="100%">
-              { children }
+      <SessionProvider session={ session }>
+        <body>
+          <ToastContainer theme='colored' />
+          <Box style={ wrapperStyle }>
+            <Header session={ session }/>
+            <Box sx={ contentStyle }>
+              <Box flexDirection="column" marginX="auto" height="100%">
+                { children }
+              </Box>
             </Box>
+            <Box style={ footerStyle }>SOME FOOTER WILL BE ADDED</Box>
           </Box>
-          <Box style={ footerStyle }>SOME FOOTER WILL BE ADDED</Box>
-        </Box>
-      </body>
+        </body>
+      </SessionProvider>
     </html>
   );
 }
