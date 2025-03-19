@@ -1,1 +1,1 @@
-export const appBarHeight = '6rem';
+export const appBarHeight = '100px';

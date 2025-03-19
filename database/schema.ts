@@ -14,8 +14,8 @@ export const users = pgTable('users', {
   id: uuid('id').notNull().primaryKey().defaultRandom()
     .unique(),
   login: varchar('login', { length: 255 }).notNull(),
-  password: text('password'),
-  role: ROLE_ENUM('role').default('USER'),
+  password: text('password').notNull(),
+  role: ROLE_ENUM('role').default('USER').notNull(),
   lastActivityDate: date('last_activity_date').defaultNow(),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
 });
