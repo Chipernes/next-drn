@@ -1,7 +1,6 @@
 import { Theme } from '@mui/material/styles';
 import { SxProps } from '@mui/system';
 import { CSSProperties } from 'react';
-import { appBarHeight } from 'basics/constants/common.constants';
 import { YodaColors, YodaFontSize, YodaJustifyContent } from 'yoda-ui/yodaTheme';
 
 export const pageStyle: CSSProperties = {
