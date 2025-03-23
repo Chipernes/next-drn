@@ -1,16 +1,16 @@
-import { redirect } from 'next/navigation';
-import { signOut } from 'lib/auth';
+import { auth, signOut } from 'lib/auth';
 
-const useHeader = () => {
+const useHeader = async () => {
+  const session = await auth();
   const handleLogout = async () => {
     'use server';
 
     await signOut();
-    redirect('/verify');
   };
 
   return {
     handleLogout,
+    session,
   };
 };
 

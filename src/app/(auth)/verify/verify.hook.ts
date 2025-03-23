@@ -1,9 +1,14 @@
+'use client';
+
 import { redirect } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { signInWithCredentials/* , signUp */ } from 'basics/actions/auth';
 import { successToast, warningToast } from 'basics/utils/toast';
 import { AuthFormSubmitCallbackType } from 'components/AuthForm/AuthForm.types';
 
 const useVerify = () => {
+  const { data: session } = useSession();
+
   const getAllUsers = async () => {
     try {
       const response = await fetch('/api/users');
@@ -24,7 +29,7 @@ const useVerify = () => {
     if (result.success) {
       successToast('You have successfully signed in');
 
-      redirect('/');
+      window.location.replace(`/${session?.user?.role.toLowerCase()}`);
     } else {
       warningToast('Login or password are not valid');
     }
