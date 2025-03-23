@@ -3,14 +3,23 @@ import { compare } from 'bcryptjs';
 import { eq } from 'drizzle-orm';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { db } from './database/drizzle';
-import { users } from './database/schema';
+import { db } from '../../database/drizzle';
+import { users } from '../../database/schema';
 
-type User = {
+type UserType = {
   id: string;
   login: string;
-  password: string;
+  role: string;
+  lastActivityDate: string;
+  createdAt: string;
 };
+
+declare module 'next-auth' {
+  /* eslint-disable-next-line */
+  interface Session extends UserType {}
+  /* eslint-disable-next-line */
+  interface User extends UserType {}
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
@@ -38,7 +47,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return {
           id: user[0].id.toString(),
           login: user[0].login.toString(),
-        } as User;
+          role: user[0].role.toString(),
+          lastActivityDate: user[0]?.lastActivityDate?.toString() || '',
+          createdAt: user[0]?.createdAt?.toString() || '',
+        };
       },
     }),
   ],
@@ -49,14 +61,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.name = user.name;
+        token.login = user.login;
+        token.role = user.role;
+        token.lastActivityDate = user.lastActivityDate;
+        token.createdAt = user.createdAt;
       }
 
       return token;
     },
     async session({ session, token }) {
       session.user.id = token.id as string;
-      session.user.name = token.name as string;
+      session.user.login = token.login as string;
+      session.user.role = token.role as string;
+      session.user.lastActivityDate = token.lastActivityDate as string;
+      session.user.createdAt = token.createdAt as string;
 
       return session;
     },

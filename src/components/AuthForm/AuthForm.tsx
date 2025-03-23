@@ -2,7 +2,7 @@ import { FC } from 'react';
 import useAuthForm from './AuthForm.hook';
 import { AuthFormPropsType } from './AuthForm.types';
 import FormContainer from 'components/FormContainer/FormContainer';
-import { FormLayoutContainer } from 'components/FormLayout';
+import FormLayoutContainer from 'components/FormLayout/FormLayoutContainer';
 import Box from 'yoda-ui/components/Box';
 import TextYoda from 'yoda-ui/components/Form/TextYoda';
 import { YodaJustifyContent, YodaSpacing } from 'yoda-ui/yodaTheme';

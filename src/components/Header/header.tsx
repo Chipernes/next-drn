@@ -1,14 +1,16 @@
 import Form from 'next/form';
-import { Session } from 'next-auth';
+import Link from 'next/link';
 import useHeader from './header.hook';
 import { drnLogoStyle, headerStyle, toolbarStyle } from './header.style';
+import { auth } from 'lib/auth';
 import AppBar from 'yoda-ui/components/AppBar';
 import Box from 'yoda-ui/components/Box';
 import Button from 'yoda-ui/components/Button';
 import Toolbar from 'yoda-ui/components/Toolbar';
 import { YodaSpacing } from 'yoda-ui/yodaTheme';
 
-const Header = ({ session }: { session: Session | null }) => {
+const Header = async () => {
+  const session = await auth();
   const {
     handleLogout,
   } = useHeader();
@@ -17,9 +19,11 @@ const Header = ({ session }: { session: Session | null }) => {
     <AppBar position="fixed">
       <Box sx={ headerStyle } paddingX={ YodaSpacing.small }>
         <Toolbar sx={ toolbarStyle }>
-          <Box sx={ drnLogoStyle }>
-            <img src="/logo.png" alt="DRN-logo"/>
-          </Box>
+          <Link href='/'>
+            <Box sx={ drnLogoStyle }>
+              <img src="/logo.png" alt="DRN-logo"/>
+            </Box>
+          </Link>
           <Box>SOME HEADER WILL BE ADDED</Box>
           {
             session

@@ -4,10 +4,10 @@
 
 import { hash } from 'bcryptjs';
 import { eq } from 'drizzle-orm';
-import { signIn } from '../../../auth';
 import { db } from '../../../database/drizzle';
 import { users } from '../../../database/schema';
 import { AuthCredentials } from '../types/auth.types';
+import { signIn } from 'lib/auth';
 
 export const signInWithCredentials = async (params: Pick<AuthCredentials, 'login' | 'password'>) => {
   const { login, password } = params;

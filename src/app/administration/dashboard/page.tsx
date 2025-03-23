@@ -1,4 +1,4 @@
-import { pageStyle } from 'app/dashboard/page.style';
+import { pageStyle } from './page.style';
 import Box from 'yoda-ui/components/Box';
 
 export default function Dashboard() {

@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { signOut } from '../../../auth';
+import { signOut } from 'lib/auth';
 
 const useHeader = () => {
   const handleLogout = async () => {
