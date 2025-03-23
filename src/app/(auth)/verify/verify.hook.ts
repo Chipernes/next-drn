@@ -1,9 +1,13 @@
-import { redirect } from 'next/navigation';
+'use client';
+
+import { redirect, useRouter } from 'next/navigation';
 import { signInWithCredentials/* , signUp */ } from 'basics/actions/auth';
 import { successToast, warningToast } from 'basics/utils/toast';
 import { AuthFormSubmitCallbackType } from 'components/AuthForm/AuthForm.types';
 
 const useVerify = () => {
+  const router = useRouter();
+
   const getAllUsers = async () => {
     try {
       const response = await fetch('/api/users');
@@ -22,9 +26,12 @@ const useVerify = () => {
     // const result = await signUp(userData);
     const result = await signInWithCredentials(userData);
     if (result.success) {
+      const event = new Event('visibilitychange');
+      document.dispatchEvent(event);
+
       successToast('You have successfully signed in');
 
-      redirect('/');
+      router.push('/');
     } else {
       warningToast('Login or password are not valid');
     }

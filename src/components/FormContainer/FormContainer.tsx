@@ -7,7 +7,7 @@ import {
 } from './FormContainer.style';
 import { FormContainerTypes } from './FormContainer.types';
 import ActionButton from 'components/ActionButton/ActionButton';
-import ContentCard from 'components/ContentCard';
+import ContentCard from 'components/ContentCard/ContentCard';
 import Box from 'yoda-ui/components/Box';
 import { YodaFormProvider } from 'yoda-ui/yodaForm';
 

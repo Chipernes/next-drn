@@ -2,10 +2,9 @@ import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import { ReactNode } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { auth } from '../../auth';
+import Header from '../components/Header/header';
 import { contentStyle, footerStyle, wrapperStyle } from 'app/page.style';
 import './globals.css';
-import Header from 'components/header/header';
 import Box from 'yoda-ui/components/Box';
 
 export const metadata: Metadata = {
@@ -13,16 +12,14 @@ export const metadata: Metadata = {
   description: 'Tasty dinner right now!',
 };
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  const session = await auth();
-
+const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en">
-      <SessionProvider session={ session }>
-        <body>
+      <body>
+        <SessionProvider>
           <ToastContainer theme='colored' />
           <Box style={ wrapperStyle }>
-            <Header session={ session }/>
+            <Header/>
             <Box sx={ contentStyle }>
               <Box flexDirection="column" marginX="auto" height="100%">
                 { children }
@@ -30,8 +27,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             </Box>
             <Box style={ footerStyle }>SOME FOOTER WILL BE ADDED</Box>
           </Box>
-        </body>
-      </SessionProvider>
+        </SessionProvider>
+      </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

@@ -4,10 +4,10 @@
 
 import { hash } from 'bcryptjs';
 import { eq } from 'drizzle-orm';
-import { signIn } from '../../../auth';
 import { db } from '../../../database/drizzle';
 import { users } from '../../../database/schema';
 import { AuthCredentials } from '../types/auth.types';
+import { signIn } from 'lib/auth';
 
 export const signInWithCredentials = async (params: Pick<AuthCredentials, 'login' | 'password'>) => {
   const { login, password } = params;
@@ -31,7 +31,7 @@ export const signInWithCredentials = async (params: Pick<AuthCredentials, 'login
 };
 
 export const signUp = async (params: AuthCredentials) => {
-  const { login, password } = params;
+  const { login, password, email, firstName, lastName } = params;
 
   const existingUser = await db
     .select()
@@ -49,6 +49,9 @@ export const signUp = async (params: AuthCredentials) => {
     await db.insert(users).values({
       login,
       password: hashedPassword,
+      email,
+      first_name: firstName,
+      last_name: lastName,
     });
 
     await signInWithCredentials({ login, password });
