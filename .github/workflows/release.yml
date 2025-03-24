@@ -17,6 +17,12 @@ jobs:
 
       - uses: actions/checkout@v3
 
+      - name: Generate DB tables
+        run: npm db:generate
+
+      - name: Migrate DB tables
+        run: npm db:migrate
+
       - name: Install Vercel CLI
         run: npm install --global vercel
 
