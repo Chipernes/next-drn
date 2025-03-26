@@ -9,7 +9,7 @@ const Home = async () => {
   return (
     <>
       <Box
-        className='max-w-[1200px] rounded-xl m-auto mt-[130px] mb-[30px] overflow-hidden'
+        className='max-w-[1200px] rounded-xl m-auto overflow-hidden'
       >
         <Image
           className='w-[1200px] h-[430px] rounded-t-xl object-cover object-left-bottom'

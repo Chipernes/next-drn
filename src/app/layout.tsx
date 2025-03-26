@@ -23,9 +23,9 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
           <ThemeRegistry>
             <StyledEngineProvider injectFirst>
               <ToastContainer theme='colored' />
-              <Box>
+              <Box className='flex flex-col min-h-[100vh]'>
                 <Header/>
-                <Box flexDirection="column" marginX="auto" height="100%">
+                <Box className='mt-[130px] mb-[30px]' flexDirection="column" marginX="auto" height="100%">
                   { children }
                 </Box>
                 <Footer/>

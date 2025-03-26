@@ -17,6 +17,7 @@ const useAuthFormConfig = () => {
       placeholder: 'Password...',
       required: true,
       validation: authFormSchema.password,
+      type: 'password',
     },
   };
 
