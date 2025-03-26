@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import useDishItem from '../components/DishItem/DishItem.hook';
 import DishItem from 'components/DishItem/DishItem';
+import useDishItem from 'components/DishItem/DishItem.hook';
 import Box from 'yoda-ui/components/Box';
 
 const Home = async () => {
@@ -8,7 +8,9 @@ const Home = async () => {
 
   return (
     <>
-      <Box className='max-w-[1200px] rounded-xl m-auto bg-white'>
+      <Box
+        className='max-w-[1200px] rounded-xl m-auto mt-[130px] mb-[30px] overflow-hidden'
+      >
         <Image
           className='w-[1200px] h-[430px] rounded-t-xl object-cover object-left-bottom'
           width={ 1200 }
@@ -16,7 +18,7 @@ const Home = async () => {
           src='/home-bg.webp'
           alt='Background image'
         />
-        <Box className='py-5 flex items-center flex-col'>
+        <Box className='py-5 flex items-center flex-col bg-white'>
           <DishItem allDishes={ allDishes }/>
         </Box>
       </Box>

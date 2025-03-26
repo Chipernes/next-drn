@@ -3,11 +3,12 @@ import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import { ReactNode } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { contentStyle, footerStyle, wrapperStyle } from 'app/page.style';
-import Header from 'components/Header/header';
+import Footer from 'components/Footer/Footer';
+import Header from 'components/Header/Header';
 import './globals.css';
 import ThemeRegistry from 'components/ThemeRegistry/ThemeRegistry';
 import Box from 'yoda-ui/components/Box';
+import { YodaColors } from 'yoda-ui/yodaTheme';
 
 export const metadata: Metadata = {
   title: 'Dinner Right Now',
@@ -17,19 +18,17 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en">
-      <body>
+      <body style={ { backgroundColor: YodaColors.background } }>
         <SessionProvider>
           <ThemeRegistry>
             <StyledEngineProvider injectFirst>
               <ToastContainer theme='colored' />
-              <Box style={ wrapperStyle }>
+              <Box>
                 <Header/>
-                <Box sx={ contentStyle }>
-                  <Box flexDirection="column" marginX="auto" height="100%">
-                    { children }
-                  </Box>
+                <Box flexDirection="column" marginX="auto" height="100%">
+                  { children }
                 </Box>
-                <Box style={ footerStyle }>SOME FOOTER WILL BE ADDED</Box>
+                <Footer/>
               </Box>
             </StyledEngineProvider>
           </ThemeRegistry>
