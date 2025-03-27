@@ -15,7 +15,7 @@ export enum AlertSeverity {
 export type SxProps = MuiSxProps<Theme>;
 
 export enum YodaColors {
-  background = 'linear-gradient(toTop, rgba(253,253,253,1) 50%, rgba(253,254,255,1) 100%)',
+  background = '#e3e3de',
   black = '#000',
   blue1 = '#F0F3F7',
   blue2 = '#E4F0FD',

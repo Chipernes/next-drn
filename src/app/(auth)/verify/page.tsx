@@ -11,7 +11,7 @@ const Page = () => {
   } = useVerify();
 
   return (
-    <Box>
+    <Box className='min-w-[500px]'>
       <AuthForm submitCallback={ handleVerifyAuthForm } cancelCallback={ handleCancelAuthForm }/>
     </Box>
   );

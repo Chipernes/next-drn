@@ -1,7 +1,7 @@
 import Form from 'next/form';
 import Link from 'next/link';
-import useHeader from './header.hook';
-import { headerStyle, navbarLinksStyle, toolbarStyle, logoStyle } from './header.style';
+import useHeader from './Header.hook';
+import { headerStyle, navbarLinksStyle, toolbarStyle, logoStyle } from './Header.style';
 import { UserRolesEnum } from 'basics/enums/auth.enum';
 import AppBar from 'yoda-ui/components/AppBar';
 import Box from 'yoda-ui/components/Box';
