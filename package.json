@@ -24,6 +24,7 @@
     "@mui/x-date-pickers": "^7.27.3",
     "@mui/x-date-pickers-pro": "^7.27.3",
     "@neondatabase/serverless": "^0.10.4",
+    "@sentry/nextjs": "^9.9.0",
     "bcryptjs": "^3.0.2",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
