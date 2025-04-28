@@ -1,36 +1,45 @@
 import { eq } from 'drizzle-orm';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest } from 'next/server';
 import { db } from '../../../../database/drizzle';
 import { tables } from '../../../../database/schema';
 
-export async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { id } = req.query;
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get('id');
 
-  if (req.method === 'GET') {
-    if (id) {
-      const table = await db.select().from(tables).where(eq(tables.id, id as string));
-      return res.json(table);
-    }
-    const allTables = await db.select().from(tables);
-    return res.json(allTables);
+  if (id) {
+    const table = await db.select().from(tables).where(eq(tables.id, id));
+    return Response.json(table);
   }
 
-  if (req.method === 'POST') {
-    const { number } = req.body;
-    const newTable = await db.insert(tables).values({ number }).returning();
-    return res.json(newTable);
-  }
+  const allTables = await db.select().from(tables);
+  return Response.json(allTables);
+}
 
-  if (req.method === 'PATCH') {
-    const { number } = req.body;
-    const updatedTable = await db.update(tables).set({ number }).where(eq(tables.id, id as string)).returning();
-    return res.json(updatedTable);
-  }
+export async function POST(req: NextRequest) {
+  const { number } = await req.json();
+  const newTable = await db.insert(tables).values({ number }).returning();
 
-  if (req.method === 'DELETE') {
-    const deletedTable = await db.delete(tables).where(eq(tables.id, id as string)).returning();
-    return res.json(deletedTable);
-  }
+  return Response.json(newTable);
+}
 
-  return res.status(405).json({ message: 'Method Not Allowed' });
+export async function PATCH(req: NextRequest) {
+  const { id, number } = await req.json();
+
+  const updatedTable = await db.update(tables)
+    .set({ number })
+    .where(eq(tables.id, id))
+    .returning();
+
+  return Response.json(updatedTable);
+}
+
+export async function DELETE(req: NextRequest) {
+  const { id } = await req.json();
+
+  const deletedTable = await db.delete(tables)
+    .where(eq(tables.id, id))
+    .returning();
+
+  return Response.json(deletedTable);
 }

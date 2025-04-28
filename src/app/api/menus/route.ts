@@ -1,36 +1,43 @@
 import { eq } from 'drizzle-orm';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest } from 'next/server';
 import { db } from '../../../../database/drizzle';
 import { menus } from '../../../../database/schema';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { id } = req.query;
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get('id');
 
-  if (req.method === 'GET') {
-    if (id) {
-      const menu = await db.select().from(menus).where(eq(menus.id, id as string));
-      return res.json(menu);
-    }
-    const allMenus = await db.select().from(menus);
-    return res.json(allMenus);
+  if (id) {
+    const menu = await db.select().from(menus).where(eq(menus.id, id));
+    return Response.json(menu);
   }
 
-  if (req.method === 'POST') {
-    const { title, type } = req.body;
-    const newMenu = await db.insert(menus).values({ title, type }).returning();
-    return res.status(201).json(newMenu);
-  }
+  const allMenus = await db.select().from(menus);
+  return Response.json(allMenus);
+}
 
-  if (req.method === 'PUT') {
-    const { title, type } = req.body;
-    const updated = await db.update(menus).set({ title, type }).where(eq(menus.id, id as string)).returning();
-    return res.json(updated);
-  }
+export async function POST(req: NextRequest) {
+  const { title, type } = await req.json();
+  const newMenu = await db.insert(menus).values({ title, type }).returning();
+  return Response.json(newMenu, { status: 201 });
+}
 
-  if (req.method === 'DELETE') {
-    await db.delete(menus).where(eq(menus.id, id as string));
-    return res.status(204).end();
-  }
+export async function PATCH(req: NextRequest) {
+  const { id, title, type } = await req.json();
 
-  return res.status(405).json({ message: 'Method Not Allowed' });
+  const updatedMenu = await db.update(menus)
+    .set({ title, type })
+    .where(eq(menus.id, id))
+    .returning();
+
+  return Response.json(updatedMenu);
+}
+
+export async function DELETE(req: NextRequest) {
+  const { id } = await req.json();
+
+  await db.delete(menus)
+    .where(eq(menus.id, id));
+
+  return new Response(null, { status: 204 });
 }
