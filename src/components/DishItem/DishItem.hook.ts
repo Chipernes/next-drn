@@ -3,7 +3,7 @@ import { config } from 'config/config';
 
 const getDishes = async () => {
   try {
-    const response = await fetch(`${config.env.apiEndpoint}/api/dish`);
+    const response = await fetch(`${config.env.apiEndpoint}/api/dishes`);
 
     if (!response.ok) {
       const errorText = await response.text();
