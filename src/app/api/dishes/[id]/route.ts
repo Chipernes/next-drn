@@ -3,8 +3,9 @@ import { NextRequest } from 'next/server';
 import { db } from '../../../../../database/drizzle';
 import { dishes } from '../../../../../database/schema';
 
-export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
-  const dish = await db.select().from(dishes).where(eq(dishes.id, params.id));
+export async function GET(_: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const dish = await db.select().from(dishes).where(eq(dishes.id, id));
   return Response.json(dish);
 }
 
@@ -18,9 +19,10 @@ export async function PATCH(req: NextRequest) {
   return Response.json(updatedDish);
 }
 
-export async function DELETE(_: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(_: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const deletedDish = await db.delete(dishes)
-    .where(eq(dishes.id, params.id))
+    .where(eq(dishes.id, id))
     .returning();
 
   return Response.json(deletedDish);
