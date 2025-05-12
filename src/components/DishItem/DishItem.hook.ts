@@ -1,27 +1,18 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { Dish } from 'basics/types/schema.types';
-import { config } from 'config/config';
+import { getDishes } from 'lib/api/dishes';
 
-const getDishes = async () => {
-  try {
-    const response = await fetch(`${config.env.apiEndpoint}/api/dishes`);
+const useDishItem = () => {
+  const [dishes, setDishes] = useState<Dish[]>([]);
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Request failed with status ${response.status}: ${errorText}`);
-    }
-
-    return await response.json();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    throw new Error(`Failed to fetch dishes: ${error.message}`);
-  }
-};
-
-const useDishItem = async () => {
-  const allDishes: Dish[] = await getDishes();
+  useEffect(() => {
+    getDishes().then(setDishes);
+  }, []);
 
   return {
-    allDishes,
+    dishes,
   };
 };
 
