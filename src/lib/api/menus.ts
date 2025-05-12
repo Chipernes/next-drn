@@ -1,6 +1,7 @@
 import { Menu } from 'basics/types/schema.types';
+import { config } from 'config/config';
 
-const BASE_URL = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/menus`;
+const BASE_URL = `${config.env.apiEndpoint}/api/menus`;
 
 export async function getMenus(): Promise<Menu[]> {
   try {
