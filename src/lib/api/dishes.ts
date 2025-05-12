@@ -1,6 +1,6 @@
 import { Dish } from 'basics/types/schema.types';
 
-const BASE_URL = '/api/dishes';
+const BASE_URL = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/dishes`;
 
 export async function getDishes(): Promise<Dish[]> {
   try {

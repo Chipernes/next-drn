@@ -4,7 +4,7 @@ import useDishItem from 'components/DishItem/DishItem.hook';
 import Box from 'yoda-ui/components/Box';
 
 const Home = async () => {
-  const { allDishes } = await useDishItem();
+  const { dishes } = await useDishItem();
 
   return (
     <>
@@ -19,7 +19,7 @@ const Home = async () => {
           alt='Background image'
         />
         <Box className='py-5 flex items-center flex-col bg-white'>
-          <DishItem allDishes={ allDishes }/>
+          <DishItem allDishes={ dishes }/>
         </Box>
       </Box>
     </>

@@ -1,6 +1,6 @@
 import { Table } from 'basics/types/schema.types';
 
-const BASE_URL = '/api/tables';
+const BASE_URL = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/tables`;
 
 export async function getTables(): Promise<Table[]> {
   try {

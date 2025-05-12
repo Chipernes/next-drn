@@ -93,8 +93,8 @@ export default function OrderCard({ order, onOrderUpdate, selectedTableNumber }:
 
             {
               orderDishes.map((orderDish) => {
-                const currentDish = dishes.find((dish) => dish.id === orderDish.dish_id);
-                if (!currentDish) return null;
+                const associatedDish = dishes.find((dish) => dish.id === orderDish.dish_id && orderDish.order_id === order.id);
+                if (!associatedDish) return null;
                 return (
                   <Stack
                     key={ orderDish.id }
@@ -106,7 +106,7 @@ export default function OrderCard({ order, onOrderUpdate, selectedTableNumber }:
                     <Stack direction="row" alignItems="center" spacing={ 1 }>
                       { statusIcon[orderDish.status] }
                       <Typography variant="body2">
-                        { currentDish?.title || '—' }
+                        { associatedDish?.title || '—' }
                       </Typography>
                     </Stack>
                     <Stack direction="row" alignItems="center" spacing={ 1 }>

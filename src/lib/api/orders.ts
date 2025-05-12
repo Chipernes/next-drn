@@ -1,6 +1,6 @@
 import { Order } from 'basics/types/schema.types';
 
-const BASE_URL = '/api/orders';
+const BASE_URL = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/orders`;
 
 export async function getOrders(): Promise<Order[]> {
   try {

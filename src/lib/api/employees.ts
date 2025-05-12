@@ -1,6 +1,6 @@
 import { Employee } from 'basics/types/schema.types';
 
-const BASE_URL = '/api/employees';
+const BASE_URL = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/employees`;
 
 export async function getEmployees(): Promise<Employee[]> {
   try {
