@@ -1,9 +1,28 @@
-import Box from 'yoda-ui/components/Box';
-import { YodaColors, YodaFontSize } from 'yoda-ui/yodaTheme';
+'use client';
 
-const Page = async () => {
+import { Container, Typography } from '@mui/material';
+import useKitchen from './kitchen.hook';
+import KitchenOrderDishCard from 'components/KitchenOrderDishCard/KitchenOrderDishCard';
+
+export default function KitchenPage() {
+  const { orderDishes, handleUpdate } = useKitchen();
+
   return (
-    <Box sx={ { fontSize: YodaFontSize.xxxLarge, color: YodaColors.blue8 } }>This is kitchen page</Box>
+    <Container sx={ { mt: 4 } }>
+      <Typography variant="h4" gutterBottom>
+        Страви на кухні
+      </Typography>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        {
+          orderDishes.map((orderDish) => (
+            <KitchenOrderDishCard
+              key={ orderDish.id }
+              orderDish={ orderDish }
+              onUpdate={ handleUpdate }
+            />
+          ))
+        }
+      </div>
+    </Container>
   );
-};
-export default Page;
+}

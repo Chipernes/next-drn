@@ -12,6 +12,16 @@ export async function getDishes(): Promise<Dish[]> {
   }
 }
 
+export async function getDishById(id?: string): Promise<Dish> {
+  try {
+    const res = await fetch(`${BASE_URL}/${id}`);
+    const response = await res.json();
+    return response[0];
+  } catch {
+    throw new Error('Failed to get dishes');
+  }
+}
+
 export async function createDish(data: Omit<Dish, 'id' | 'createdAt'>): Promise<Dish> {
   try {
     const res = await fetch(BASE_URL, {
