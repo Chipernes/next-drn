@@ -12,7 +12,7 @@ const AdminDashboardPage = () => {
   return (
     <Container sx={ { mt: 4 } }>
       <Typography variant="h4" gutterBottom>
-        Панель адміністратора
+        Аналітика
       </Typography>
 
       <Box className="grid grid-cols-1 md:grid-cols-3 gap-4">
