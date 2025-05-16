@@ -27,7 +27,7 @@ export async function createMenu(data: Omit<Menu, 'id' | 'createdAt'>): Promise<
 export async function updateMenu(id: string, data: Partial<Omit<Menu, 'id' | 'createdAt'>>): Promise<Menu> {
   try {
     const res = await fetch(`${BASE_URL}/${id}`, {
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(data),
     });
     return await res.json();
