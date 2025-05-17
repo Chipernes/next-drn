@@ -53,9 +53,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # TODO: Add tests checking in future
-      #- name: Test
-      #  run: npm run test
+      - name: Test
+        run: npm run test
 
       - name: Lint
         run: npm run ci:lint
