@@ -2,13 +2,13 @@ import Form from 'next/form';
 import Link from 'next/link';
 import useHeader from './Header.hook';
 import { headerStyle, navbarLinksStyle, toolbarStyle, logoStyle } from './Header.style';
-import { UserRolesEnum } from 'basics/enums/auth.enum';
+import { Role } from 'basics/enums/schema.enums';
 import AppBar from 'yoda-ui/components/AppBar';
 import Box from 'yoda-ui/components/Box';
 import Button from 'yoda-ui/components/Button';
 import { ButtonType } from 'yoda-ui/components/Button/Button.types';
 import Toolbar from 'yoda-ui/components/Toolbar';
-import { YodaColors, YodaSpacing } from 'yoda-ui/yodaTheme';
+import { YodaColors, YodaFontSize, YodaFontWeight, YodaSpacing } from 'yoda-ui/yodaTheme';
 
 const Header = async () => {
   const {
@@ -17,7 +17,7 @@ const Header = async () => {
   } = await useHeader();
 
   const displayNavigationButtons = (role: string) => {
-    if (role === UserRolesEnum.service) {
+    if (role === Role.SERVICE) {
       return <>
         <Box sx={ navbarLinksStyle }>
           <Link href='/service'>
@@ -25,7 +25,7 @@ const Header = async () => {
           </Link>
         </Box>
       </>;
-    } if (role === UserRolesEnum.kitchen) {
+    } if (role === Role.KITCHEN) {
       return <>
         <Box sx={ navbarLinksStyle }>
           <Link href='/kitchen'>
@@ -33,7 +33,7 @@ const Header = async () => {
           </Link>
         </Box>
       </>;
-    } if (role === UserRolesEnum.administration) {
+    } if (role === Role.ADMINISTRATION) {
       return <>
         <Box sx={ navbarLinksStyle }>
           <Link href='/service'>
@@ -82,7 +82,13 @@ const Header = async () => {
               <Box sx={ { color: YodaColors.primaryBlue } }>Diner Right Now</Box>
             </Box>
           </Link>
-          { session && session.user?.role && displayNavigationButtons(session.user?.role) }
+          { session?.user?.role && displayNavigationButtons(session.user?.role) }
+          {
+            session?.user?.role === Role.USER
+            && <Box sx={ { fontSize: YodaFontSize.xLarge, fontWeight: YodaFontWeight.bold } }>
+                  Welcome, { session?.user?.name }
+            </Box>
+          }
           { session ? displayAuthButtons(true) : displayAuthButtons(false) }
         </Toolbar>
       </Box>

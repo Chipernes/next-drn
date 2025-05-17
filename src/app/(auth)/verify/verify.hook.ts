@@ -1,7 +1,7 @@
 'use client';
 
 import { redirect, useRouter } from 'next/navigation';
-import { signInWithCredentials/* , signUp */ } from 'basics/actions/auth';
+import { signInWithCredentials, signInWithGoogle/* , signUp */ } from 'basics/actions/auth';
 import { successToast, warningToast } from 'basics/utils/toast';
 import { AuthFormSubmitCallbackType } from 'components/AuthForm/AuthForm.types';
 
@@ -37,10 +37,25 @@ const useVerify = () => {
     }
   };
 
+  const handleVerifyWithGoogle = async () => {
+    const result = await signInWithGoogle();
+
+    if (result.success) {
+      const event = new Event('visibilitychange');
+      document.dispatchEvent(event);
+      successToast('You have successfully signed in with Google');
+
+      redirect(result.redirectLink);
+    } else {
+      warningToast('Some error where occurred during registration via Google');
+    }
+  };
+
   return {
     handleCancelAuthForm,
     handleVerifyAuthForm,
     getAllUsers,
+    handleVerifyWithGoogle,
   };
 };
 export default useVerify;

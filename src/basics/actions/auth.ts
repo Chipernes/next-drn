@@ -30,6 +30,23 @@ export const signInWithCredentials = async (params: Pick<AuthCredentials, 'login
   }
 };
 
+export const signInWithGoogle = async () => {
+  try {
+    const result = await signIn('google', {
+      redirect: false,
+    });
+
+    if (result?.error) {
+      return { success: false, error: result.error };
+    }
+
+    return { redirectLink: result, success: true };
+  } catch (error) {
+    console.log(error, 'SignIn error');
+    return { success: false, error: 'SignIn error' };
+  }
+};
+
 export const signUp = async (params: AuthCredentials) => {
   const { login, password, role } = params;
 
