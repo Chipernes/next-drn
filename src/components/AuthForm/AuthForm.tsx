@@ -7,7 +7,7 @@ import Box from 'yoda-ui/components/Box';
 import TextYoda from 'yoda-ui/components/Form/TextYoda';
 import { YodaSpacing } from 'yoda-ui/yodaTheme';
 
-const StrategicImperativeForm: FC<AuthFormPropsType> = ({
+const AuthForm: FC<AuthFormPropsType> = ({
   submitCallback,
   cancelCallback,
 }) => {
@@ -36,4 +36,4 @@ const StrategicImperativeForm: FC<AuthFormPropsType> = ({
   );
 };
 
-export default StrategicImperativeForm;
+export default AuthForm;

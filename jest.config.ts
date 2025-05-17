@@ -18,12 +18,14 @@ const config: Config = {
     '!src/**/*.d.ts',
     '!src/**/__tests__/**',
     '!src/**/?(*.)+(spec|test).*',
-    '!src/yoda-ui/**',
-    '!src/basic/**',
-    '!src/api/**',
-    '!src/hooks/**',
   ],
-  // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'], // якщо потрібно
+  moduleNameMapper: {
+    '^components/(.*)$': '<rootDir>/src/components/$1',
+    '^yoda-ui/(.*)$': '<rootDir>/src/yoda-ui/$1',
+    '^lib/(.*)$': '<rootDir>/src/lib/$1',
+    '^basics/(.*)$': '<rootDir>/src/basics/$1',
+  },
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
