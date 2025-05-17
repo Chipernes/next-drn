@@ -11,7 +11,7 @@ const AdminHomePage = () => {
   return (
     <Container sx={ { mt: 4 } }>
       <Typography variant="h4" gutterBottom>
-        Адміністративна панель
+        Панель адміністратора
       </Typography>
 
       <Grid container spacing={ 3 }>
