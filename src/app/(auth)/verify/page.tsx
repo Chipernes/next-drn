@@ -5,7 +5,7 @@ import AuthForm from 'components/AuthForm/AuthForm';
 import Box from 'yoda-ui/components/Box';
 import Button from 'yoda-ui/components/Button';
 
-const Page = async () => {
+const Page = () => {
   const {
     handleCancelAuthForm,
     handleVerifyAuthForm,

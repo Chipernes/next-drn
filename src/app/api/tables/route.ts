@@ -1,45 +1,30 @@
-import { eq } from 'drizzle-orm';
+import * as Sentry from '@sentry/nextjs';
 import { NextRequest } from 'next/server';
 import { db } from '../../../../database/drizzle';
 import { tables } from '../../../../database/schema';
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const id = searchParams.get('id');
-
-  if (id) {
-    const table = await db.select().from(tables).where(eq(tables.id, id));
-    return Response.json(table);
+export async function GET() {
+  try {
+    const allTables = await db.select().from(tables);
+    return Response.json(allTables);
+  } catch (error) {
+    Sentry.captureException(error, { extra: { route: 'GET /api/tables' } });
+    return new Response('Internal Server Error', { status: 500 });
   }
-
-  const allTables = await db.select().from(tables);
-  return Response.json(allTables);
 }
 
 export async function POST(req: NextRequest) {
-  const { number } = await req.json();
-  const newTable = await db.insert(tables).values({ number }).returning();
+  try {
+    const { number } = await req.json();
 
-  return Response.json(newTable);
-}
+    if (!number) {
+      return new Response('number is required', { status: 400 });
+    }
 
-export async function PATCH(req: NextRequest) {
-  const { id, number } = await req.json();
-
-  const updatedTable = await db.update(tables)
-    .set({ number })
-    .where(eq(tables.id, id))
-    .returning();
-
-  return Response.json(updatedTable);
-}
-
-export async function DELETE(req: NextRequest) {
-  const { id } = await req.json();
-
-  const deletedTable = await db.delete(tables)
-    .where(eq(tables.id, id))
-    .returning();
-
-  return Response.json(deletedTable);
+    const newTable = await db.insert(tables).values({ number }).returning();
+    return Response.json(newTable[0], { status: 201 });
+  } catch (error) {
+    Sentry.captureException(error, { extra: { route: 'POST /api/tables' } });
+    return new Response('Internal Server Error', { status: 500 });
+  }
 }
