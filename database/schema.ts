@@ -10,7 +10,7 @@ import {
 } from 'drizzle-orm/pg-core';
 
 // ENUMs
-export const ROLE_ENUM = pgEnum('role', ['SERVICE', 'KITCHEN', 'ADMINISTRATION']);
+export const ROLE_ENUM = pgEnum('role', ['USER', 'SERVICE', 'KITCHEN', 'ADMINISTRATION']);
 export const STATUS_ORDER_ENUM = pgEnum('status_order', ['NEW', 'PROCESSING', 'DONE', 'CANCELLED']);
 export const STATUS_DISH_ENUM = pgEnum('status_dish', ['NEW', 'COOKING', 'DONE', 'SERVED', 'CANCELLED']);
 

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { UserRolesEnum } from './basics/enums/auth.enum';
+import { Role } from './basics/enums/schema.enums';
 import { auth } from './lib/auth';
 
 export { auth } from 'lib/auth';
@@ -10,9 +10,9 @@ export async function middleware(req: NextRequest) {
   const { pathname } = new URL(req.url);
 
   const accessRules: Record<string, string[]> = {
-    '/kitchen': [UserRolesEnum.kitchen, UserRolesEnum.administration],
-    '/service': [UserRolesEnum.service, UserRolesEnum.administration],
-    '/administration': [UserRolesEnum.administration],
+    '/kitchen': [Role.KITCHEN, Role.ADMINISTRATION],
+    '/service': [Role.SERVICE, Role.ADMINISTRATION],
+    '/administration': [Role.ADMINISTRATION],
   };
 
   if (accessRules[pathname]) {
