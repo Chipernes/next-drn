@@ -66,7 +66,8 @@ describe('POST /api/dishes', () => {
   });
 
   it('returns 400 if fields are missing', async () => {
-    const { ...invalidBody } = validBody;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars,unused-imports/no-unused-vars
+    const { title, ...invalidBody } = validBody;
     const res = await POST(createRequest(invalidBody));
     expect(res.status).toBe(400);
     const bodyText = await (res as any)._body;
