@@ -19,6 +19,14 @@ const config: Config = {
     '!src/**/__tests__/**',
     '!src/**/?(*.)+(spec|test).*',
   ],
+  coverageThreshold: {
+    global: {
+      branches: 40,
+      functions: 40,
+      lines: 40,
+      statements: 40,
+    },
+  },
   moduleNameMapper: {
     '^components/(.*)$': '<rootDir>/src/components/$1',
     '^yoda-ui/(.*)$': '<rootDir>/src/yoda-ui/$1',
