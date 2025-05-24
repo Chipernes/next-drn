@@ -15,11 +15,12 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { firstName, lastName, picture, role } = await req.json();
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { first_name, last_name, picture, role } = await req.json();
 
     const missing = [];
-    if (!firstName) missing.push('firstName');
-    if (!lastName) missing.push('lastName');
+    if (!first_name) missing.push('firstName');
+    if (!last_name) missing.push('lastName');
     if (!role) missing.push('role');
 
     if (missing.length) {
@@ -27,8 +28,8 @@ export async function POST(req: NextRequest) {
     }
 
     const newEmployee = await db.insert(employees).values({
-      first_name: firstName,
-      last_name: lastName,
+      first_name,
+      last_name,
       picture,
       role,
     }).returning();

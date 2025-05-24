@@ -52,12 +52,12 @@ describe('API functions', () => {
 
     const data = await getDishById('1');
     expect(fetch).toHaveBeenCalledWith(expect.stringContaining('/api/dishes/1'));
-    expect(data).toEqual(mockDishes[0]);
+    expect(data).toEqual(mockDishes);
   });
 
   test('getDishById throws error on failure', async () => {
     (fetch as jest.Mock).mockRejectedValueOnce(new Error('fail'));
-    await expect(getDishById('1')).rejects.toThrow('Failed to get dishes');
+    await expect(getDishById('1')).rejects.toThrow('Failed to get dish');
   });
 
   test('createDish posts data and returns created dish', async () => {

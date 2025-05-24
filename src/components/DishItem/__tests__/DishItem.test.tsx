@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen } from '@testing-library/react';
 import DishItem from '../DishItem';
-import { Dish } from 'basics/types/schema.types';
+import { DishItemType } from '../DishItem.type';
 
 jest.mock('imagekitio-next', () => ({
   IKImage: (props: any) => <img { ...props } alt={ props.alt } />,
 }));
 
-const dishes: Dish[] = [
+const dishes: DishItemType[] = [
   {
     id: '1',
     title: 'Pizza Margherita',
@@ -15,9 +15,10 @@ const dishes: Dish[] = [
     price: 150,
     weight: 300,
     picture: '/pizza1.jpg',
-    createdAt: new Date(),
-    menu_id: '1',
-    isHidden: false,
+    menu: {
+      id: '1',
+      title: 'Піца',
+    },
   },
   {
     id: '2',
@@ -26,9 +27,10 @@ const dishes: Dish[] = [
     price: 200,
     weight: 350,
     picture: '/pizza2.jpg',
-    createdAt: new Date(),
-    menu_id: '2',
-    isHidden: false,
+    menu: {
+      id: '2',
+      title: 'Паста',
+    },
   },
 ];
 

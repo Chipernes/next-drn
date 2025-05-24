@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const requiredFields = ['menuId', 'title', 'description', 'price', 'weight', 'picture', 'isHidden'];
+    const requiredFields = ['menu_id', 'title', 'description', 'price', 'weight', 'picture', 'isHidden'];
     const missingFields = requiredFields.filter((key) => body[key] === undefined);
 
     if (missingFields.length) {
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     }
 
     const newDish = await db.insert(dishes).values({
-      menu_id: body.menuId,
+      menu_id: body.menu_id,
       title: body.title,
       description: body.description,
       price: body.price,

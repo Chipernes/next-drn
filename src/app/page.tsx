@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Loader from '../yoda-ui/components/Loader';
 import DishItem from 'components/DishItem/DishItem';
 import useDishItem from 'components/DishItem/DishItem.hook';
 import Box from 'yoda-ui/components/Box';
@@ -21,7 +22,11 @@ const Home = () => {
           alt='Background image'
         />
         <Box className='py-5 flex items-center flex-col bg-white'>
-          <DishItem allDishes={ dishes }/>
+          {
+            !dishes.length
+              ? <Loader center/>
+              : <DishItem allDishes={ dishes }/>
+          }
         </Box>
       </Box>
     </>
