@@ -8,9 +8,15 @@ const useAdministrationConfig = () => {
     },
     {
       title: 'Меню',
-      description: 'Керування стравами, меню та їх відображенням',
+      description: 'Керування групами меню',
       href: '/administration/menu',
       imageUrl: '/administration/menu.jpg',
+    },
+    {
+      title: 'Страви',
+      description: 'Керування стравами та їх відображенням',
+      href: '/administration/dishes',
+      imageUrl: '/administration/dishes.jpg',
     },
     {
       title: 'Співробітники',

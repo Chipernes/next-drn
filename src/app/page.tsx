@@ -23,7 +23,7 @@ const Home = () => {
         />
         <Box className='py-5 flex items-center flex-col bg-white'>
           {
-            !dishes
+            !dishes.length
               ? <Loader center/>
               : <DishItem allDishes={ dishes }/>
           }

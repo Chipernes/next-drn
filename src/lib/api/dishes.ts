@@ -12,13 +12,12 @@ export async function getDishes(): Promise<Dish[]> {
   }
 }
 
-export async function getDishById(id?: string): Promise<Dish> {
+export async function getDishById(id: string): Promise<Dish> {
   try {
     const res = await fetch(`${BASE_URL}/${id}`);
-    const response = await res.json();
-    return response[0];
+    return await res.json();
   } catch {
-    throw new Error('Failed to get dishes');
+    throw new Error('Failed to get dish');
   }
 }
 

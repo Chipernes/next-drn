@@ -52,7 +52,7 @@ describe('POST /api/dishes', () => {
   });
 
   const validBody = {
-    menuId: 'menu1',
+    menu_id: 'menu1',
     title: 'Soup',
     description: 'Hot',
     price: 100,

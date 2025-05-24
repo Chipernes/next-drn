@@ -6,6 +6,8 @@ import AddMenuDialog from 'components/AddMenuDialog/AddMenuDialog';
 import MenuCard from 'components/MenuCard/MenuCard';
 import Box from 'yoda-ui/components/Box';
 import Button from 'yoda-ui/components/Button';
+import Loader from 'yoda-ui/components/Loader';
+import { YodaColors } from 'yoda-ui/yodaTheme';
 
 export default function AdminMenuPage() {
   const {
@@ -17,7 +19,7 @@ export default function AdminMenuPage() {
 
   return (
     <Container sx={ { mt: 4 } }>
-      <Typography variant="h4" gutterBottom>
+      <Typography className='text-center' variant="h4" gutterBottom>
         Меню
       </Typography>
 
@@ -29,13 +31,17 @@ export default function AdminMenuPage() {
         </Button>
       </Box>
 
-      <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {
-          menus.map((menu) => (
-            <MenuCard key={ menu.id } menu={ menu } onChange={ handleReload } />
-          ))
-        }
-      </Box>
+      {
+        !menus.length
+          ? <Box className="w-100 flex justify-center"><Loader center color={ YodaColors.black }/></Box>
+          : <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {
+              menus.map((menu) => (
+                <MenuCard key={ menu.id } menu={ menu } onChange={ handleReload } />
+              ))
+            }
+          </Box>
+      }
     </Container>
   );
 }

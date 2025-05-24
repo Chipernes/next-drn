@@ -54,8 +54,8 @@ describe('POST /api/employees', () => {
   beforeEach(() => jest.clearAllMocks());
 
   const validBody = {
-    firstName: 'Jane',
-    lastName: 'Smith',
+    first_name: 'Jane',
+    last_name: 'Smith',
     picture: 'newpic.jpg',
     role: 'Chef',
   };

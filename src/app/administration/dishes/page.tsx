@@ -6,6 +6,8 @@ import AddDishDialog from 'components/AddDishDialog/AddDishDialog';
 import DishCard from 'components/DishCard/DishCard';
 import Box from 'yoda-ui/components/Box';
 import Button from 'yoda-ui/components/Button';
+import Loader from 'yoda-ui/components/Loader';
+import { YodaColors } from 'yoda-ui/yodaTheme';
 
 export default function AdminDishesPage() {
   const {
@@ -18,7 +20,7 @@ export default function AdminDishesPage() {
 
   return (
     <Container sx={ { mt: 4 } }>
-      <Typography variant="h4" gutterBottom>
+      <Typography className='text-center' variant="h4" gutterBottom>
         Страви
       </Typography>
 
@@ -30,13 +32,18 @@ export default function AdminDishesPage() {
         </Button>
       </Box>
 
-      <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {
-          dishes.map((dish) => (
-            <DishCard key={ dish.id } dish={ dish } onChange={ handleReload } menus={ menus } />
-          ))
-        }
-      </Box>
+      {
+        !dishes.length
+          ? <Box className="w-100 flex justify-center"><Loader center color={ YodaColors.black }/></Box>
+          : <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {
+              dishes.map((dish) => (
+                <DishCard key={ dish.id } dish={ dish } onChange={ handleReload } menus={ menus } />
+              ))
+            }
+          </Box>
+      }
+
     </Container>
   );
 }

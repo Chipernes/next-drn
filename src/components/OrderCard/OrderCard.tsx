@@ -58,7 +58,7 @@ export default function OrderCard({ order, onOrderUpdate, selectedTableNumber }:
     handleAddDish,
   } = useOrderCard(order, onOrderUpdate);
 
-  if (order.status === StatusOrder.DONE) return null;
+  if (order.status === StatusOrder.CANCELLED || order.status === StatusOrder.DONE) return null;
 
   return (
     <Card sx={ { mb: 2 } }>
