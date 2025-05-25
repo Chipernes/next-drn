@@ -63,15 +63,19 @@ export default function OrderCard({ order, onOrderUpdate, selectedTableNumber }:
 
   return (
     <Card sx={ { mb: 2 } }>
-      <CardHeader
-        title={
-          <Stack direction="row" alignItems="center" spacing={ 1 }>
-            { orderStatusIcon[order.status] }
-            <Typography variant="h6">{ `Стіл №${selectedTableNumber ?? <Loader center/>}` }</Typography>
-          </Stack>
-        }
-        subheader={ `Офіціант: ${selectedWaiter ? `${selectedWaiter.first_name} ${selectedWaiter.last_name}` : <Loader center/>}` }
-      />
+      {
+        !selectedTableNumber || !selectedWaiter?.first_name || !selectedWaiter?.last_name
+          ? <Loader center/>
+          : <CardHeader
+            title={
+              <Stack direction="row" alignItems="center" spacing={ 1 }>
+                { orderStatusIcon[order.status] }
+                <Typography variant="h6">Стіл №{ selectedTableNumber }</Typography>
+              </Stack>
+            }
+            subheader={ `Офіціант: ${selectedWaiter?.first_name} ${selectedWaiter?.last_name}` }
+          />
+      }
       <CardContent>
         <Button
           variant="outlined"
