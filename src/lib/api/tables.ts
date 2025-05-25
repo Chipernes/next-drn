@@ -27,7 +27,7 @@ export async function createTable(data: Omit<Table, 'id'>): Promise<Table> {
 export async function updateTable(id: string, data: Partial<Omit<Table, 'id'>>): Promise<Table> {
   try {
     const res = await fetch(`${BASE_URL}/${id}`, {
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(data),
     });
     return await res.json();

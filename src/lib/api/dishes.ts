@@ -36,7 +36,7 @@ export async function createDish(data: Omit<Dish, 'id' | 'createdAt'>): Promise<
 export async function updateDish(id: string, data: unknown): Promise<Dish> {
   try {
     const res = await fetch(`${BASE_URL}/${id}`, {
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(data),
     });
     return await res.json();

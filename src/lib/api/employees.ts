@@ -27,7 +27,7 @@ export async function createEmployee(data: Omit<Employee, 'id'>): Promise<Employ
 export async function updateEmployee(id: string, data: Partial<Omit<Employee, 'id'>>): Promise<Employee> {
   try {
     const res = await fetch(`${BASE_URL}/${id}`, {
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(data),
     });
     return await res.json();
