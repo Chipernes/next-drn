@@ -18,16 +18,17 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
   }
 }
 
-export async function PATCH(req: NextRequest) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id, ...data } = await req.json();
+    const { id } = await params;
+    const updates = await req.json();
 
     if (!id) {
       return new Response('Missing dish ID', { status: 400 });
     }
 
     const updatedDish = await db.update(dishes)
-      .set(data)
+      .set(updates)
       .where(eq(dishes.id, id))
       .returning();
 

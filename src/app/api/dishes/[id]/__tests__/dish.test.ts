@@ -41,6 +41,10 @@ jest.mock('../../../../../../database/drizzle', () => ({
 describe('/api/dishes/[id] API handlers', () => {
   beforeEach(() => jest.clearAllMocks());
 
+  const createRequest = (body: any) => ({
+    json: async () => body,
+  });
+
   describe('GET', () => {
     it('returns 404 if dish not found', async () => {
       (dbModule.db.select as jest.Mock).mockReturnValue({
@@ -73,8 +77,9 @@ describe('/api/dishes/[id] API handlers', () => {
       const req = {
         json: async () => ({ name: 'No ID Dish' }),
       } as any;
+      const params = Promise.resolve({ id: '' });
 
-      const res = await PATCH(req);
+      const res = await PATCH(req, { params });
       expect(res.status).toBe(400);
       const text = await res.text();
       expect(text).toBe('Missing dish ID');
@@ -89,11 +94,10 @@ describe('/api/dishes/[id] API handlers', () => {
         }),
       });
 
-      const req = {
-        json: async () => ({ id: '999', name: 'Unknown Dish' }),
-      } as any;
+      const params = Promise.resolve({ id: '1' });
+      const req = createRequest({ quantity: 3 });
 
-      const res = await PATCH(req);
+      const res = await PATCH(req as any, { params });
       expect(res.status).toBe(404);
       const text = await res.text();
       expect(text).toBe('Dish not found');
@@ -104,11 +108,10 @@ describe('/api/dishes/[id] API handlers', () => {
         throw new Error('DB update error');
       });
 
-      const req = {
-        json: async () => ({ id: '1', name: 'Error Dish' }),
-      } as any;
+      const params = Promise.resolve({ id: '1' });
+      const req = createRequest({ quantity: 3 });
 
-      const res = await PATCH(req);
+      const res = await PATCH(req as any, { params });
       expect(res.status).toBe(500);
       expect(Sentry.captureException).toHaveBeenCalled();
     });

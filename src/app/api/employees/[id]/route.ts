@@ -21,12 +21,13 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
-    const { firstName, lastName, picture, role } = await req.json();
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { first_name, last_name, picture, role } = await req.json();
 
     const updatedEmployee = await db.update(employees)
       .set({
-        first_name: firstName,
-        last_name: lastName,
+        first_name,
+        last_name,
         picture,
         role,
       })

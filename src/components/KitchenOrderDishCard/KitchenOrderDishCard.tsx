@@ -21,6 +21,7 @@ import {
 import { FC } from 'react';
 import useKitchenOrderDishCard from './KitchenOrderDishCard.hook';
 import { KitchenOrderDishCardPropsType } from './KitchenOrderDishCard.types';
+import Loader from 'yoda-ui/components/Loader';
 
 const statusIcon = {
   NEW: <FiberNew color="info" />,
@@ -43,7 +44,7 @@ const KitchenOrderDishCard: FC<KitchenOrderDishCardPropsType> = ({ orderDish, on
     <Card sx={ { mb: 2 } }>
       <CardContent>
         <Typography variant="h6" gutterBottom>
-          { statusIcon[orderDish.status] } Страва: { dish?.title || '...' }
+          { statusIcon[orderDish.status] } Страва: { dish?.title || <Loader center/> }
         </Typography>
         <Typography variant="body1">
           Статус: { orderDish.status }

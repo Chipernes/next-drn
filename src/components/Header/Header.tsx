@@ -21,7 +21,7 @@ const Header = async () => {
       return <>
         <Box sx={ navbarLinksStyle }>
           <Link href='/service'>
-            <Button buttonType={ ButtonType.primary }>Go to Service</Button>
+            <Button buttonType={ ButtonType.primary }>Сервіс</Button>
           </Link>
         </Box>
       </>;
@@ -29,7 +29,7 @@ const Header = async () => {
       return <>
         <Box sx={ navbarLinksStyle }>
           <Link href='/kitchen'>
-            <Button buttonType={ ButtonType.primary }>Go to Kitchen</Button>
+            <Button buttonType={ ButtonType.primary }>Кухня</Button>
           </Link>
         </Box>
       </>;
@@ -37,13 +37,13 @@ const Header = async () => {
       return <>
         <Box sx={ navbarLinksStyle }>
           <Link href='/service'>
-            <Button buttonType={ ButtonType.primary }>Go to Service</Button>
+            <Button buttonType={ ButtonType.primary }>Сервіс</Button>
           </Link>
           <Link href='/kitchen'>
-            <Button buttonType={ ButtonType.primary }>Go to Kitchen</Button>
+            <Button buttonType={ ButtonType.primary }>Кухня</Button>
           </Link>
           <Link href='/administration'>
-            <Button buttonType={ ButtonType.primary }>Go to Administration</Button>
+            <Button buttonType={ ButtonType.primary }>Адміністрування</Button>
           </Link>
         </Box>
       </>;
@@ -57,7 +57,7 @@ const Header = async () => {
       return <>
         <Box>
           <Form action={ handleLogout }>
-            <Button type={ 'submit' }>Logout</Button>
+            <Button type={ 'submit' }>Вийти</Button>
           </Form>
         </Box>
       </>;
@@ -66,7 +66,7 @@ const Header = async () => {
     return <>
       <Box>
         <Link href='/verify'>
-          <Button buttonType={ ButtonType.home }>Go to Verifying</Button>
+          <Button buttonType={ ButtonType.home }>Верифікація</Button>
         </Link>
       </Box>
     </>;
@@ -86,7 +86,7 @@ const Header = async () => {
           {
             session?.user?.role === Role.USER
             && <Box sx={ { fontSize: YodaFontSize.xLarge, fontWeight: YodaFontWeight.bold } }>
-                  Welcome, { session?.user?.name }
+                  Вітаємо, { session?.user?.name }
             </Box>
           }
           { session ? displayAuthButtons(true) : displayAuthButtons(false) }

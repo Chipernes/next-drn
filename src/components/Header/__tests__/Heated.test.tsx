@@ -36,7 +36,7 @@ describe('Header', () => {
     render(await Header());
 
     expect(screen.getByAltText('DRN-logo')).toBeInTheDocument();
-    expect(screen.getByText('Go to Verifying')).toBeInTheDocument();
+    expect(screen.getByText('Верифікація')).toBeInTheDocument();
   });
 
   it('renders service navigation for SERVICE role', async () => {
@@ -47,8 +47,8 @@ describe('Header', () => {
 
     render(await Header());
 
-    expect(screen.getByText('Go to Service')).toBeInTheDocument();
-    expect(screen.getByText('Logout')).toBeInTheDocument();
+    expect(screen.getByText('Сервіс')).toBeInTheDocument();
+    expect(screen.getByText('Вийти')).toBeInTheDocument();
   });
 
   it('renders kitchen navigation for KITCHEN role', async () => {
@@ -59,8 +59,8 @@ describe('Header', () => {
 
     render(await Header());
 
-    expect(screen.getByText('Go to Kitchen')).toBeInTheDocument();
-    expect(screen.getByText('Logout')).toBeInTheDocument();
+    expect(screen.getByText('Кухня')).toBeInTheDocument();
+    expect(screen.getByText('Вийти')).toBeInTheDocument();
   });
 
   it('renders all navigation for ADMINISTRATION role', async () => {
@@ -71,20 +71,20 @@ describe('Header', () => {
 
     render(await Header());
 
-    expect(screen.getByText('Go to Service')).toBeInTheDocument();
-    expect(screen.getByText('Go to Kitchen')).toBeInTheDocument();
-    expect(screen.getByText('Go to Administration')).toBeInTheDocument();
+    expect(screen.getByText('Сервіс')).toBeInTheDocument();
+    expect(screen.getByText('Кухня')).toBeInTheDocument();
+    expect(screen.getByText('Адміністрування')).toBeInTheDocument();
   });
 
   it('shows welcome message for USER role', async () => {
     mockedUseHeader.mockResolvedValueOnce({
-      session: createSession(Role.USER, 'Alice'),
+      session: createSession(Role.USER, 'Аліса'),
       handleLogout: jest.fn(),
     });
 
     render(await Header());
 
-    expect(screen.getByText('Welcome, Alice')).toBeInTheDocument();
-    expect(screen.getByText('Logout')).toBeInTheDocument();
+    expect(screen.getByText('Вітаємо, Аліса')).toBeInTheDocument();
+    expect(screen.getByText('Вийти')).toBeInTheDocument();
   });
 });
