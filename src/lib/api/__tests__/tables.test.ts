@@ -53,7 +53,7 @@ describe('Table API', () => {
 
     const result = await updateTable(mockTable.id, update);
     expect(fetch).toHaveBeenCalledWith(expect.stringContaining(`/tables/${mockTable.id}`), expect.objectContaining({
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(update),
     }));
     expect(result.number).toBe(7);

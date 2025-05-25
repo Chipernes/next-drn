@@ -61,7 +61,7 @@ describe('Employee API', () => {
 
     const result = await updateEmployee('1', updated);
     expect(fetch).toHaveBeenCalledWith(expect.stringContaining('/employees/1'), expect.objectContaining({
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(updated),
     }));
     expect(result.first_name).toBe('Updated');

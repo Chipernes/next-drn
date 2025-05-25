@@ -96,7 +96,7 @@ describe('API functions', () => {
 
     const data = await updateDish('1', updatedData);
     expect(fetch).toHaveBeenCalledWith(expect.stringContaining('/api/dishes/1'), expect.objectContaining({
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(updatedData),
     }));
     expect(data).toEqual(mockDishes[0]);
