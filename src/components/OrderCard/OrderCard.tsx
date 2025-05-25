@@ -26,6 +26,7 @@ import {
 import useOrderCard from './OrderCard.hook';
 import { OrderCardPropsType } from './OrderCard.types';
 import { StatusDish, StatusOrder } from 'basics/enums/schema.enums';
+import Loader from 'yoda-ui/components/Loader';
 
 const statusIcon = {
   NEW: <FiberNew color="info" />,
@@ -66,10 +67,10 @@ export default function OrderCard({ order, onOrderUpdate, selectedTableNumber }:
         title={
           <Stack direction="row" alignItems="center" spacing={ 1 }>
             { orderStatusIcon[order.status] }
-            <Typography variant="h6">{ `Стіл №${selectedTableNumber ?? '—'}` }</Typography>
+            <Typography variant="h6">{ `Стіл №${selectedTableNumber ?? <Loader center/>}` }</Typography>
           </Stack>
         }
-        subheader={ `Офіціант: ${selectedWaiter ? `${selectedWaiter.first_name} ${selectedWaiter.last_name}` : '—'}` }
+        subheader={ `Офіціант: ${selectedWaiter ? `${selectedWaiter.first_name} ${selectedWaiter.last_name}` : <Loader center/>}` }
       />
       <CardContent>
         <Button
